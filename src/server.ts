@@ -4,11 +4,14 @@ import { createConnection } from 'typeorm';
 import express from 'express';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
+import authRoutes from './routes/auth';
+import postRoutes from './routes/posts';
+import subRoutes from './routes/subs';
+import trim from './middleware/trim';
 
 dotenv.config();
 
-import authRoutes from './routes/auth';
-import trim from './middleware/trim';
+const PORT = process.env.PORT;
 
 const app = express();
 
@@ -23,9 +26,11 @@ app.get('/', (_, res) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/posts', postRoutes);
+app.use('/api/subs', subRoutes);
 
-app.listen(8000, async () => {
-	console.log('server running at http://localhost:8000');
+app.listen(PORT, async () => {
+	console.log(`server running at http://localhost:${PORT}`);
 
 	try {
 		await createConnection();
