@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 
-export default (req: Request, res: Response, next: NextFunction) => {
+export default (req: Request, _: Response, next: NextFunction) => {
 	// const exceptions = ['password'];
-	const exceptions = [];
+	const exceptions = ['password'];
 
 	Object.keys(req.body).forEach(key => {
 		if (!exceptions.includes(key) && typeof req.body[key] === 'string') {
