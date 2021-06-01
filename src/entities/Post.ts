@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import Entity from './Entity';
 import User from './User';
-import { makeId, sluggify } from '../../utils/helpers';
+import { makeId, sluggify } from '../utils/helpers';
 import Sub from './Sub';
 import Comment from './Comment';
 

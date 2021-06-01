@@ -9,7 +9,7 @@ import {
 import Entity from './Entity';
 import User from './User';
 import Post from './Post';
-import { makeId } from '../../utils/helpers';
+import { makeId } from '../utils/helpers';
 
 @TOEntity('comments')
 export default class Comment extends Entity {
