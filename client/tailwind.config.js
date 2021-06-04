@@ -21,10 +21,24 @@ module.exports = {
 					900: '#00182a',
 				},
 			},
+			container: false,
 		},
 	},
 	variants: {
 		extend: {},
 	},
-	plugins: [],
+	plugins: [
+		function ({ addComponents }) {
+			addComponents({
+				'.container': {
+					width: '100%',
+					marginLeft: 'auto',
+					marginRight: 'auto',
+					'@screen sm': { maxWidth: '640px' },
+					'@screen md': { maxWidth: '768px' },
+					'@screen lg': { maxWidth: '975px' },
+				},
+			});
+		},
+	],
 };
