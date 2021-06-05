@@ -5,7 +5,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { Post } from '../types';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { GetServerSideProps } from 'next';
+// import { GetServerSideProps } from 'next';
 
 dayjs.extend(relativeTime);
 
