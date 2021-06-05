@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React, { FormEvent, useState } from 'react';
 import InputGroup from '../components/InputGroup';
 import { useRouter } from 'next/router';
+import { useAuthDispatch, useAuthState } from '../context/auth';
 
 export default function Home() {
 	const [username, setUsername] = useState('');
@@ -11,15 +12,21 @@ export default function Home() {
 	const [errors, setErrors] = useState<any>({});
 
 	const router = useRouter();
+	const dispatch = useAuthDispatch();
+	const { authenticated } = useAuthState();
+
+	if (authenticated) router.push('/');
 
 	const submitForm = async (event: FormEvent) => {
 		event.preventDefault();
 
 		try {
-			await axios.post('/auth/login', {
+			const res = await axios.post('/auth/login', {
 				password,
 				username,
 			});
+
+			dispatch('LOGIN', res.data);
 
 			router.push('/');
 		} catch (e) {

@@ -14,7 +14,10 @@ export default function Home() {
 	useEffect(() => {
 		axios
 			.get('/posts')
-			.then(res => setPosts(res.data))
+			.then(res => {
+				setPosts(res.data);
+				console.log(res.data);
+			})
 			.catch(err => console.log(err));
 	}, []);
 

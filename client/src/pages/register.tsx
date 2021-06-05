@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React, { FormEvent, useState } from 'react';
 import InputGroup from '../components/InputGroup';
 import { useRouter } from 'next/router';
+import { useAuthState } from '../context/auth';
 
 export default function Home() {
 	const [email, setEmail] = useState('');
@@ -13,6 +14,10 @@ export default function Home() {
 	const [errors, setErrors] = useState<any>({});
 
 	const router = useRouter();
+
+	const { authenticated } = useAuthState();
+
+	if (authenticated) router.push('/');
 
 	const submitForm = async (event: FormEvent) => {
 		event.preventDefault();
