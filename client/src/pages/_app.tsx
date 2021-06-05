@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import '../styles/icons.css';
 import { AppProps } from 'next/app';
 import axios from 'axios';
 import Navbar from '../components/Navbar';

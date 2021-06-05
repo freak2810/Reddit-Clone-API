@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
 import auth from '../middleware/auth';
+import user from '../middleware/user';
 import Post from '../entities/Post';
 import User from '../entities/User';
 import Sub from '../entities/Sub';
@@ -31,7 +32,12 @@ const getPosts = async (_: Request, res: Response) => {
 	try {
 		const posts = await Post.find({
 			order: { createdAt: 'DESC' },
+			relations: ['comments', 'votes', 'sub'],
 		});
+
+		if (res.locals.user) {
+			posts.forEach(p => p.setUserVote(res.locals.user));
+		}
 
 		return res.status(200).json(posts);
 	} catch (e) {
@@ -76,9 +82,9 @@ const commentOnPost = async (req: Request, res: Response) => {
 };
 const router = Router();
 
-router.post('/', auth, createPost);
-router.get('/', getPosts);
+router.post('/', user, auth, createPost);
+router.get('/', user, getPosts);
 router.get('/:identifier/:slug', getPost);
-router.post('/:identifier/:slug/comments', auth, commentOnPost);
+router.post('/:identifier/:slug/comments', user, auth, commentOnPost);
 
 export default router;
