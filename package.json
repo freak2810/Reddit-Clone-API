@@ -13,6 +13,7 @@
     "@types/morgan": "^1.9.2",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",
+    "concurrently": "^6.2.0",
     "eslint": "^7.26.0",
     "eslint-config-prettier": "^8.3.0",
     "nodemon": "^2.0.7",
@@ -35,11 +36,15 @@
     "morgan": "^1.10.0",
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.3",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "typeorm-seeding": "^1.6.1"
   },
   "scripts": {
     "start": "ts-node src/server.ts",
-    "dev": "nodemon --exec ts-node src/server.ts",
-    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
+    "server": "nodemon --exec ts-node src/server.ts",
+    "client": "cd client && npm run dev",
+    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
+    "dev": "concurrently \"yarn run server\" \"yarn run client\" -n server,client",
+    "seed": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed"
   }
 }

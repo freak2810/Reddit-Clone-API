@@ -1,29 +1,32 @@
 {
-   "type": "postgres",
-   "host": "ec2-79-125-30-28.eu-west-1.compute.amazonaws.com",
-   "port": 5432,
-   "username": "zyzobvfrdbvrat",
-   "password": "19f864ee5eb16971b694ed773863bfb70151eeb703871b9cf64e4cc7cbe8ee43",
-   "database": "de1qd9jqqh02mb",
-   "extra": {
-      "ssl":  {
-         "rejectUnauthorized": false
-      }
-   },
-   "synchronize": false,
-   "logging": true,
-   "entities": [
-      "src/entities/**/*.ts"
-   ],
-   "migrations": [
-      "src/migrations/**/*.ts"
-   ],
-   "subscribers": [
-      "src/subscribers/**/*.ts"
-   ],
-   "cli": {
-      "entitiesDir": "src/entities",
-      "migrationsDir": "src/migrations",
-      "subscribersDir": "src/subscribers"
-   }
+  "type": "postgres",
+  "host": "ec2-79-125-30-28.eu-west-1.compute.amazonaws.com",
+  "port": 5432,
+  "username": "zyzobvfrdbvrat",
+  "password": "19f864ee5eb16971b694ed773863bfb70151eeb703871b9cf64e4cc7cbe8ee43",
+  "database": "de1qd9jqqh02mb",
+  "extra": {
+    "ssl": {
+      "rejectUnauthorized": false
+    }
+  },
+  "synchronize": false,
+  "logging": true,
+  "entities": [
+    "src/entities/**/*.ts"
+  ],
+  "migrations": [
+    "src/migrations/**/*.ts"
+  ],
+  "subscribers": [
+    "src/subscribers/**/*.ts"
+  ],
+  "seeds": [
+    "src/seeds/**/*{.ts,.js}"
+  ],
+  "cli": {
+    "entitiesDir": "src/entities",
+    "migrationsDir": "src/migrations",
+    "subscribersDir": "src/subscribers"
+  }
 }
