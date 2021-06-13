@@ -8,6 +8,7 @@ import { Sub } from '../../types';
 import classNames from 'classnames';
 import { useAuthState } from '../../context/auth';
 import axios from 'axios';
+import Sidebar from '../../components/Sidebar';
 
 export default function SubPage() {
 	const [ownSub, setOwnSub] = useState(false);
@@ -138,6 +139,7 @@ export default function SubPage() {
 					{/* Posts & Sidebar */}
 					<div className="container flex pt-5">
 						<div className="w-160">{postsMarkup}</div>
+						<Sidebar sub={sub} />
 					</div>
 				</Fragment>
 			)}

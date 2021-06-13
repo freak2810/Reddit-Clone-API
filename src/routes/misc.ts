@@ -5,6 +5,8 @@ import Post from '../entities/Post';
 import Comment from '../entities/Comment';
 import Vote from '../entities/Vote';
 import user from '../middleware/user';
+import { getConnection } from 'typeorm';
+import Sub from '../entities/Sub';
 
 const router = Router();
 
@@ -66,6 +68,30 @@ const vote = async (req: Request, res: Response) => {
 	}
 };
 
+const topSubs = async (_: Request, res: Response) => {
+	try {
+		const imageUrlExpr = `COALESCE('${process.env.APP_URL}/images/' || s."imageUrn", 'https://i.pravatar.cc/24')`;
+
+		const subs = await getConnection()
+			.createQueryBuilder()
+			.select(
+				`s.title, s.name, ${imageUrlExpr} as "imageUrl", count(p.id) as "postCount"`
+			)
+			.from(Sub, 's')
+			.leftJoin(Post, 'p', `s.name = p."subName"`)
+			.groupBy('s.title, s.name, "imageUrl"')
+			.orderBy('"postCount"', 'DESC')
+			.limit(5)
+			.execute();
+
+		return res.status(200).json(subs);
+	} catch (e) {
+		// console.log(e);
+		return res.status(500).json({ error: 'Something went wrong' });
+	}
+};
+
 router.post('/vote', user, auth, vote);
+router.get('/top-subs', topSubs);
 
 export default router;

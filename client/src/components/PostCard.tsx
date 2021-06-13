@@ -4,6 +4,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import Link from 'next/link';
 import { Post } from '../types';
 import classNames from 'classnames';
+import Image from 'next/image';
 
 interface PostCardProps {
 	post: Post;
@@ -76,7 +77,9 @@ export default function PostCard({
 			<div className="w-full p-2">
 				<div className="flex items-center">
 					<Link href={`/r/${subName}`}>
-						<img
+						<Image
+							height={24}
+							width={24}
 							src="https://i.pravatar.cc/24"
 							className="w-6 h-6 mr-1 rounded cursor-pointer"
 						/>

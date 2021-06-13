@@ -34,4 +34,5 @@ export interface Sub {
 	imageUrl: string;
 	bannerUrl?: string;
 	posts: Post[];
+	postCount?: number;
 }
