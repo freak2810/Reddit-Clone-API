@@ -108,8 +108,9 @@ const uploadSubImage = async (req: Request, res: Response) => {
 
 	try {
 		const type = req.body.type;
+		console.log(type);
 
-		if (type !== 'image' || type !== 'banner') {
+		if (type !== 'image' && type !== 'banner') {
 			fs.unlinkSync(req.file.path);
 			return res.status(400).json({ error: 'Invalid type' });
 		}
@@ -131,6 +132,7 @@ const uploadSubImage = async (req: Request, res: Response) => {
 		await sub.save();
 		return res.status(201).json(sub);
 	} catch (e) {
+		console.log(e);
 		return res.status(500).json({ error: 'Something went wrong' });
 	}
 };

@@ -1,6 +1,4 @@
-import axios from 'axios';
 import Head from 'next/head';
-import { Fragment, useEffect, useState } from 'react';
 import { Post } from '../types';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
