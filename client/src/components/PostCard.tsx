@@ -5,20 +5,13 @@ import Link from 'next/link';
 import { Post } from '../types';
 import classNames from 'classnames';
 import Image from 'next/image';
+import ActionButton from './ActionButton';
 
 interface PostCardProps {
 	post: Post;
 }
 
 dayjs.extend(relativeTime);
-
-const ActionButton = ({ children }) => {
-	return (
-		<div className="px-1 py-1 mr-1 text-xs text-gray-400 rounded cursor-pointer hover:bg-gray-200">
-			{children}
-		</div>
-	);
-};
 
 export default function PostCard({
 	post: {
@@ -35,7 +28,7 @@ export default function PostCard({
 		username,
 	},
 }: PostCardProps) {
-	const vote = async value => {
+	const vote = async (value: number) => {
 		try {
 			const res = await axios.post('/misc/vote', {
 				identifier,
@@ -51,12 +44,13 @@ export default function PostCard({
 
 	return (
 		<div key={identifier} className="flex mb-4 bg-white rounded">
+			{/* Vote Section */}
 			<div className="w-10 py-3 text-center bg-gray-200 rounded-l">
 				{/* Upvote */}
 				<div
 					className={classNames(
 						'w-6 mx-auto text-gray-400 rounded cursor-pointer hover:bg-gray-300 hover:text-red-500',
-						userVote === 1 && 'text-red-500'
+						{ 'text-red-500': userVote === 1 }
 					)}
 					onClick={() => vote(1)}
 				>
