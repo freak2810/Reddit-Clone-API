@@ -21,7 +21,7 @@ export default function Home() {
 			</Head>
 			<div className="container flex pt-4">
 				{/* Posts feed */}
-				<div className="w-160">
+				<div className="w-full">
 					{posts?.map(post => (
 						<PostCard post={post} key={post.identifier} />
 					))}

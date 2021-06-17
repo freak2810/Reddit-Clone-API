@@ -37,3 +37,15 @@ export interface Sub {
 	posts: Post[];
 	postCount?: number;
 }
+
+export interface Comment {
+	createdAt: string;
+	updatedAt: string;
+	identifier: string;
+	body: string;
+	username: string;
+
+	//Virtual Fields
+	userVote: number;
+	voteScore: number;
+}
