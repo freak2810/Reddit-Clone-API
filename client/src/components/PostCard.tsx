@@ -75,11 +75,11 @@ export default function PostCard({
 							height={24}
 							width={24}
 							src="https://i.pravatar.cc/24"
-							className="w-6 h-6 mr-1 rounded cursor-pointer"
+							className="rounded-full cursor-pointer"
 						/>
 					</Link>
 					<Link href={`/r/${subName}`}>
-						<a className="text-xs font-bold cursor-pointer hover:underline ">
+						<a className="ml-1 text-xs font-bold cursor-pointer hover:underline ">
 							/r/{subName}
 						</a>
 					</Link>

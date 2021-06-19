@@ -8,6 +8,7 @@ import authRoutes from './routes/auth';
 import postRoutes from './routes/posts';
 import subRoutes from './routes/subs';
 import miscRoutes from './routes/misc';
+import userRoutes from './routes/users';
 import trim from './middleware/trim';
 import cors from 'cors';
 
@@ -40,6 +41,7 @@ app.get('/', (_, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/subs', subRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api/misc', miscRoutes);
 
 app.listen(PORT, async () => {
