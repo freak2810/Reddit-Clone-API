@@ -137,10 +137,31 @@ const uploadSubImage = async (req: Request, res: Response) => {
 	}
 };
 
+const searchSubs = async (req: Request, res: Response) => {
+	const name = req.params.name;
+	try {
+		if (isEmpty(name))
+			return res.status(400).json({ error: 'name must not be empty' });
+
+		const subs = await getRepository(Sub)
+			.createQueryBuilder()
+			.where('LOWER(name) LIKE :name', {
+				name: `${name.toLowerCase().trim()}%`,
+			})
+			.getMany();
+
+		return res.status(200).json(subs);
+	} catch (e) {
+		console.log(e);
+		return res.status(500).json({ error: 'Something went wrong' });
+	}
+};
+
 const router = Router();
 
 router.post('/', user, auth, createSub);
 router.get('/:name', user, getSub);
+router.get('/search/:name', searchSubs);
 router.post(
 	'/:name/image',
 	user,
