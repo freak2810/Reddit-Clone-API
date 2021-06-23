@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { AuthProvider } from '../context/auth';
 import { SWRConfig } from 'swr';
 
-axios.defaults.baseURL = 'http://localhost:8000/api';
+axios.defaults.baseURL = `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api`;
 axios.defaults.withCredentials = true;
 
 const fetcher = async (url: string) => {

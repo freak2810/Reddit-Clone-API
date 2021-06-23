@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import { Post, Comment } from '../../../../types';
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import Sidebar from '../../../../components/Sidebar';
 import classNames from 'classnames';
 import axios from 'axios';
@@ -17,6 +17,8 @@ dayjs.extend(relativeTime);
 
 export default function PostPage() {
 	const [newComment, setNewComment] = useState('');
+	const [description, setDescription] = useState('');
+
 	const router = useRouter();
 
 	const { authenticated, user } = useAuthState();
@@ -32,6 +34,16 @@ export default function PostPage() {
 	);
 
 	if (error) router.push('/');
+
+	useEffect(() => {
+		if (!post) return;
+
+		let desc = post.body || post.title;
+
+		if (desc.length > 160) desc = desc.substring(0, 158).concat('..');
+
+		setDescription(desc);
+	}, [post]);
 
 	const vote = async (value: number, comment?: Comment) => {
 		if (!authenticated) router.push('/login');
@@ -78,6 +90,11 @@ export default function PostPage() {
 		<>
 			<Head>
 				<title>{post?.title}</title>
+				<meta property="og:title" content={post?.title} />
+				<meta property="twitter:title" content={post?.title} />
+				<meta property="og:description" content={description} />
+				<meta property="twitter:description" content={description} />
+				<meta name="description" content={description} />
 			</Head>
 			<Link href={`/r/${sub}`}>
 				<a>

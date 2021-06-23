@@ -19,13 +19,13 @@ export default function Home() {
 	const {
 		data,
 		error,
-		mutate,
 		size: page,
 		setSize: setPage,
 		isValidating,
 		revalidate,
 	} = useSWRInfinite<Post[]>(index => `/posts?page=${index}`);
 
+	const initialLoading = !data && !error;
 	const posts: Post[] = data ? [].concat(...data) : [];
 
 	useEffect(() => {
@@ -60,11 +60,31 @@ export default function Home() {
 		<Fragment>
 			<Head>
 				<title>readit: the front page of the internet</title>
+				<meta
+					property="og:title"
+					content="readit: the front page of the internet"
+				/>
+				<meta
+					property="twitter:title"
+					content="readit: the front page of the internet"
+				/>
+				<meta
+					property="og:description"
+					content="Reddit is a network of communities based on people's interests. Find communities you're interested in, and become part of an online community!"
+				/>
+				<meta
+					property="twitter:description"
+					content="Reddit is a network of communities based on people's interests. Find communities you're interested in, and become part of an online community!"
+				/>
+				<meta
+					name="description"
+					content="Reddit is a network of communities based on people's interests. Find communities you're interested in, and become part of an online community!"
+				/>
 			</Head>
 			<div className="container flex pt-4">
 				{/* Posts feed */}
 				<div className="w-full">
-					{isValidating && <p className="text-lg text-center">Loading ..</p>}
+					{initialLoading && <p className="text-lg text-center">Loading ..</p>}
 					{posts?.map(post => (
 						<PostCard
 							post={post}
